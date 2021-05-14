@@ -20,6 +20,7 @@ public class CityService {
     }
 
     public void createCity(City city){
+        log.info("Call method: createCity(name: " + city.getName() + ",description" + city.getDescription() + ") ");
     if(cityRepository.existsByName(city.getName())){
         throw new CityAlreadyExistsException("City already exists.");
     }else{
@@ -27,7 +28,7 @@ public class CityService {
         cityRepository.save(city);
     }
 
-    
+
 
 }
 
