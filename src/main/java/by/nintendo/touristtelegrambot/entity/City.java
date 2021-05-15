@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Data
 @NoArgsConstructor
@@ -17,16 +19,13 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private long id;
-
-    @NotBlank
     @Column(name = "name")
+    @NotBlank
+    @Size(min = 3, max = 60, message = "Name can be 3 to 60 characters long")
     private String name;
-
-    @NotBlank
-    @Column(name = "create_time")
-    private String createTime;
-    
-    @NotBlank
     @Column(name = "description")
+    @Size(min = 3, max = 60, message = "description can be 3 to 60 characters long")
     private String description;
+
+
 }
