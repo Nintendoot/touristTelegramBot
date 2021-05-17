@@ -27,5 +27,8 @@ public class City {
     @Size(min = 3, max = 60, message = "description can be 3 to 60 characters long")
     private String description;
 
-
+    @Override
+    public String toString() {
+        return  name + " - " + description;
+    }
 }
