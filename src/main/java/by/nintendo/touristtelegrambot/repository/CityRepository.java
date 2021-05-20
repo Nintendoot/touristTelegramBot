@@ -6,10 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
 @Repository
-public interface CityRepository extends JpaRepository<City,Long> {
+public interface CityRepository extends JpaRepository<City, Long> {
     boolean existsByName(String name);
+
     Optional<City> getCityByName(String name);
-    boolean existsByNameAndIdIsNot(String name,long id);
+
+    boolean existsByNameAndIdIsNot(String name, long id);
 }

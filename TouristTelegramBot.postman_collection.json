@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "073a3408-72dc-4d97-a6e9-da6d9a7bdc55",
+		"name": "TouristTelegramBot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/city/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create city",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Гомель\",\n\"description\": \"Часовня-усыпальница князей Паскевичей очень красивое место))\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/city",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleate City",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/city/8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/city/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update City",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Москва\",\n\"description\": \"Московский планетарий - отличное место для семейного отдыха.\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/city/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://petstore.swagger.io/v1",
+			"type": "string"
+		}
+	]
+}

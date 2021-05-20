@@ -15,28 +15,29 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.HashMap;
 import java.util.Map;
+
 @Slf4j
 @RestControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        Map<String,String> err=new HashMap<>();
-        for(FieldError fieldError:e.getFieldErrors()){
-            err.put(fieldError.getField(),fieldError.getDefaultMessage());
+        Map<String, String> err = new HashMap<>();
+        for (FieldError fieldError : e.getFieldErrors()) {
+            err.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
         log.error("ArgumentNotValid : " + e.getMessage());
-        return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CityAlreadyExistsException.class)
-    public ResponseEntity<Object> cityAlreadyExists(CityAlreadyExistsException e){
+    public ResponseEntity<Object> cityAlreadyExists(CityAlreadyExistsException e) {
         log.error("CityAlreadyExistsException :" + e.getMessage());
-        return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CityNotFoundException.class)
-    public ResponseEntity<Object> cityAlreadyExists(CityNotFoundException e){
+    public ResponseEntity<Object> cityAlreadyExists(CityNotFoundException e) {
         log.error("CityNotFoundException : " + e.getMessage());
-        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

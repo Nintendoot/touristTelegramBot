@@ -1,8 +1,6 @@
 package by.nintendo.touristtelegrambot.bot;
 
-
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,13 +18,16 @@ import java.util.List;
 @Component
 public class Bot extends TelegramLongPollingBot {
 
-    @Autowired
-   private CommandTouristTelegramBot commandTouristTelegramBot;
+    private final CommandTouristTelegramBot commandTouristTelegramBot;
 
     @Value("${token}")
     private String botToken;
     @Value("${username}")
     private String botUsername;
+
+    public Bot(CommandTouristTelegramBot commandTouristTelegramBot) {
+        this.commandTouristTelegramBot = commandTouristTelegramBot;
+    }
 
 
     @Override
@@ -41,9 +42,9 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        String inMessage = commandTouristTelegramBot.findBotCommand(update.getMessage().getText());
-        String chatId = update.getMessage().getChatId().toString();
-        sendMsg(chatId,inMessage);
+        String inMessage = getInMessage(update);
+        String chatId = getChatId(update);
+        sendMsg(chatId, commandTouristTelegramBot.findBotCommand(inMessage));
     }
 
 
@@ -56,9 +57,20 @@ public class Bot extends TelegramLongPollingBot {
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
-            log.error("Exception:",e.toString());
+            log.error("Error sending message.", e);
         }
+    }
+
+    private String getInMessage(Update update) {
+        return update.hasEditedMessage() ?
+                update.getEditedMessage().getText() :
+                update.getMessage().getText();
+    }
+
+    private String getChatId(Update update) {
+        return update.hasEditedMessage() ?
+                update.getEditedMessage().getChatId().toString() :
+                update.getMessage().getChatId().toString();
     }
 
     public synchronized void setButtons(SendMessage sendMessage) {
@@ -70,10 +82,10 @@ public class Bot extends TelegramLongPollingBot {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow helpRow = new KeyboardRow();
-        helpRow.add(new KeyboardButton(Constants.HELP.item));
+        helpRow.add(new KeyboardButton("Help"));
 
         KeyboardRow allCitysRow = new KeyboardRow();
-        allCitysRow.add(new KeyboardButton(Constants.ALL_CITY.item));
+        allCitysRow.add(new KeyboardButton("All city"));
 
         keyboard.add(allCitysRow);
         keyboard.add(helpRow);

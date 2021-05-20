@@ -24,11 +24,11 @@ public class City {
     @Size(min = 3, max = 60, message = "Name can be 3 to 60 characters long")
     private String name;
     @Column(name = "description")
-    @Size(min = 3, max = 60, message = "description can be 3 to 60 characters long")
+    @Size(min = 3, max = 60, message = "Description can be 3 to 60 characters long")
     private String description;
 
     @Override
     public String toString() {
-        return  name + " - " + description;
+        return name + " - " + description;
     }
 }
