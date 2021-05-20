@@ -31,7 +31,7 @@ Technology:
 1) Скачать repositorie.
 2) Запустить приложение.
 3) Найти в телеграмме бота с именем TouristTelegramBot. Токен бота: 1812348566:AAGQyWXK1lzO8YVngU3sGFKok-Rbg-OViEI
-4) Для проверки REST использовать TouristTelegramBot.postman_collection.json или test.http.
+4) Для проверки REST использовать TouristTelegramBot.postman_collection.json или test.http(в папке controller).
 
 | URL          | Method    | Action          |
 | ---------    | -----     | --------       |
